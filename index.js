@@ -9,14 +9,15 @@ const app = express();
 
 // Basic Configuration
 const port = process.env.PORT || 3000;
-// const mongoURI = process.env.MONGO_URI;
+const mongoURI = process.env.MONGO_URI;
 
-// mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true});
-// let urlPairSchema = new mongoose.Schema({
-//   original_url: String,
-//   short_url: {type: Number, unique: true}
-// })
-// let UrlPair = mongoose.model('UrlPair', urlPairSchema);
+mongoose.set('strictQuery', false);
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
+    console.log('mongoDB connected');
+}).catch((err) => {
+    console.log('connection to mongoDB failed');
+    console.log(err);
+})
 
 app.use(cors());
 
